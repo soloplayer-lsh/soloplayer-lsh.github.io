@@ -188,7 +188,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-10-31 17:22:26 / Modified: 17:26:35" itemprop="dateCreated datePublished" datetime="2021-10-31T17:22:26+08:00">2021-10-31</time>
+              <time title="Created: 2021-10-31 17:22:26 / Modified: 17:45:45" itemprop="dateCreated datePublished" datetime="2021-10-31T17:22:26+08:00">2021-10-31</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -211,30 +211,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="格林函数：解决微分方程的天才方法"><a href="#格林函数：解决微分方程的天才方法" class="headerlink" title="格林函数：解决微分方程的天才方法"></a>格林函数：解决微分方程的天才方法</h1><p>格林函数是一种用于<strong>解决线性微分方程</strong>的非常精妙的方法。<br>$$<br>L y(x) = f(x)<br>$$</p>
-<h2 id="1-线性微分算子-Linear-differential-operator"><a href="#1-线性微分算子-Linear-differential-operator" class="headerlink" title="1. 线性微分算子 Linear differential operator"></a>1. 线性微分算子 Linear differential operator</h2><p><strong>算子 Operater</strong></p>
-<p>算子是指，以一个函数作为输入，得到另一个函数的一个“过程”，即函数到函数之间的映射。比如，一元微分$\cfrac{\mathrm{d}}{\mathrm{d}x}$就是一个算子，因为它可以将函数$f(x)=x^2$映射为另一个函数$g(x)=2x$。</p>
-<p>一般地，我们可以将这样的映射过程表示为这样的形式：<br>$$<br>Lf(x)=g(x)<br>$$<br>它意味着，某个“输入的”函数，在算子$L$的映射下，得到了另一个（已知的）函数$g(x)$，一般来说，我们面临的问题就是需要求得这个“输入的”函数$f(x)$。 格林函数就是试图构造另一个算子，使得当输入这个$g(x)$时，输出我们所需要的解f(x)$，即<br>$$<br>Gg(x)=f(x)<br>$$<br><strong>微分 Differential</strong></p>
-<p>顾名思义，微分算子就是说，这个算子只跟微分有关。</p>
-<p><strong>线性 Linear</strong> </p>
-<p>直观地说，如果一个算子是线性的，那么其作用于两个（或几个）函数之和，则可以等效为这个算子分别作用于这些函数后再求和。即<br>$$<br>L\left[\lambda y_1(x) + \mu y_2(x)\right] = \lambda Ly_1(x) + \mu Ly_2(x)<br>$$<br>例如，我们认为电势与电荷在空间上的分布之间有这样的关系（这里我们先假装不知道$-\nabla^2$具体是什么东西）：<br>$$<br>-\nabla^2 \phi(\vec{r}) = \cfrac{\rho(\vec{r})}{\epsilon_0}<br>$$<br>我们又通过一些手段肯定了这么一个事实：某种电荷的分布$\rho_1(\vec{r)}$引起的电势分布$\phi_1(\vec{r})$，与另一种电荷的分布$\rho_2(\vec{r)}$引起的电势分布$\phi_2(\vec{r})$只和，等于这两种电荷分布$\rho_{1+2}(\vec{r)}$之和共同引起的电势分布$\phi_{1+2}(\vec{r})$。据此我们就可以称，算子$-\nabla^2$是线性的。</p>
-<p>后面我们将看到，格林函数充分利用了这样的线性性质。</p>
-<h2 id="2-狄拉克函数-Dirac-delta-“function”"><a href="#2-狄拉克函数-Dirac-delta-“function”" class="headerlink" title="2. 狄拉克函数 Dirac delta “function”"></a>2. 狄拉克函数 Dirac delta “function”</h2><p>还是刚才关于静电学的例子，<br>$$<br>-\nabla^2 \phi(\vec{r}) = \cfrac{\rho(\vec{r})}{\epsilon_0}<br>$$<br>我们想解决这个微分方程，也就是说，我们想通过已知的电荷分布，即任意$\vec{r}$处的电荷密度$\rho(\vec{r})$，看看电势$\phi(\vec{r})$是如何分布的。</p>
-<p>为简单起见，我们把问题限定在一维条件下。我们首先考虑某个包含了点$x$的相对较小的区域$D$，点$x$处的电荷密度可以近似表示为（实际上这里隐含了电荷在空间分布上须连续的条件）：<br>$$<br>\rho(x) \approx \cfrac{1}{V} \int_D \rho(\xi) \mathrm{d} \xi<br>$$<br>当对区域$D$取极限$D\rightarrow (x-\epsilon, x+\epsilon), \epsilon \rightarrow0$时，左右将严格相等。然而，这样的表示并不理想，因为区域$D$将会在我们之后取极限时发生变化。因此，我们可以使用这样一个技巧：恒在整个空间$\mathbb{R}$积分，而对被积函数做一个小小的改变：<br>$$<br>\begin{eqnarray} \label{eq}<br>&amp;\rho(x) &amp; \approx \cfrac{1}{V_D} \int_D \rho(\xi) \mathrm{d} \xi \<br>&amp;&amp;=\cfrac{1}{V} \int_{\mathbb{R}} \rho(\xi) 1_D(\xi) \mathrm{d} \xi<br>\end{eqnarray}<br>$$<br>$1_D(x)$称为<strong>指示函数（indicator funtion）</strong>，这里，其表示“是否在区域$D$中，如果在区域$D$中，则值为1，否则，值为0。此时，$V$已经不依赖于区域$D$的选择了，我们可以将它放入被积函数中：<br>$$<br>\begin{eqnarray}<br>&amp; \rho(x) &amp; \approx \cfrac{1}{V_D} \int_D \rho(\xi) \mathrm{d} \xi \<br>&amp; &amp; =\cfrac{1}{V} \int_{\mathbb{R}} \rho(\xi) 1_D(\xi) \mathrm{d} \xi \<br>&amp; &amp; =\int_{\mathbb{R}} \rho(\xi) \left( \cfrac{1_D(\xi)}{V} \right) \mathrm{d} \xi<br>\end{eqnarray}<br>$$<br>这样做的一个好处就是，当我们对$D$取极限的过程中，唯一改变的只有我们刚才提到的指示函数$1_D(\xi)$，而$\cfrac{1_D(\xi)}{V}$最终将趋于臭名昭著的<strong>狄拉克函数（Dirac delta function）</strong>。<br>$$<br>\lim_{D\rightarrow (x^-, x^+)} \cfrac{1_D(\xi)}{V} = \delta(x-\xi)<br>$$<br>最终，我们得到这样的表示<br>$$<br>\rho(x) = \int_{\mathbb{R}} \rho(\xi) \delta(x-\xi) \mathrm{d} \xi<br>$$</p>
-<p>根据这样的过程，我们不难导出这样一些关于狄拉克函数的重要事实：<br>$$<br>\delta(x-\xi) =<br>\begin{cases}<br>0 &amp; , &amp; \xi \neq x \<br>+\infty &amp; , &amp; \xi = x<br>\end{cases}<br>$$</p>
-<p>$$<br>\int_\mathbb{R} \delta(x-\xi) \mathrm{d} \xi = 1<br>$$</p>
-<blockquote>
-<p>第一次见这样的性质时，我们难免会感到奇怪。别着急跳过，仔细将其带入上面的例子（或者其他合理的例子）并解释其物理意义（略）时，你一定会觉得这样看似奇怪的性质实际上无比自然。</p>
-</blockquote>
-<h2 id="3-格林函数原理-Principle-of-Green’s-function"><a href="#3-格林函数原理-Principle-of-Green’s-function" class="headerlink" title="3. 格林函数原理 Principle of Green’s function"></a>3. 格林函数原理 Principle of Green’s function</h2><p>回到我们之前的问题，给定电荷密度分布函数$\rho$，我们想知道其产生的电势$\phi$。而格林函数的方法利用了算子的线性性质。</p>
-<p>由于电荷是空间连续分布的，而上述的电势-电荷关系是线性的，于是电势也可以连续相加（积分），这就是用格林函数求解的总体思路。</p>
-<p>此时，点电荷产生的电势可以认为是一个格林函数，其取决于该点电荷$\xi$的位置和这个电势的位置$x$，因此我们我们将函数表示为<br>$$<br>\cfrac{G(x;\xi)}{\epsilon_0}<br>$$<br>格林函数可以看成是一系列位置$x$，以及我们要考虑的点电荷$\xi$的函数，而我们想要这一些列函数的连续和（或者更准确地说，是带有权重、电荷密度的积分），因此，由于电势-电荷关系的线性性质，电势$\phi$也应该经过相同的求和过程：<br>$$<br>\phi(x) = \int_\mathbb{R} \rho(\xi) \cfrac{G(x;\xi)}{\epsilon_0} \mathrm{d}\xi<br>$$<br>我们把上述的过程一般化：</p>
-<p>我们感兴趣的方程长这样：<br>$$<br>Ly(x)=f(x)<br>$$<br>注意，$L$是线性的。</p>
-<p>首先，我们找到格林函数，这相当于找到点电荷产生的电势。格林函数和$\delta$函数应该被视为$x$的不同函数，这意味着不同位置的点电荷产生的、处于不同位置的电势：<br>$$<br>LG(x;\xi)=\delta(x-\xi)<br>$$<br>找到格林函数后，我们将两边都乘以$f(\xi)$<br>$$<br>f(\xi)LG(x;\xi)=f(\xi)\delta(x-\xi)<br>$$</p>
-<p>这个$f(\xi)$不依赖于$x$，站在$L$的角度上来看，它是一个常数，所以可以交换$L$和$f(\xi)$的作用顺序，即<br>$$<br>L\left[f(\xi)G(x;\xi)\right]=f(\xi)\delta(x-\xi)<br>$$<br>再来做一个连续求和（积分）：<br>$$<br>\int_\mathbb{R} L\left[f(\xi)G(x;\xi)\right] \mathrm{d} \xi =\int_\mathbb{R} f(\xi)\delta(x-\xi) \mathrm{d} \xi<br>$$<br>右边，如之前所述，等于$f(x)$。<br>由于$L$是线性的，左边的积分可以被认为是无限的线性组合，因此其可以将积分号$\int_\mathbb{R}$调换：<br>$$<br>L \left[\int_\mathbb{R} f(\xi)G(x;\xi) \mathrm{d} \xi \right]=f(x)<br>$$<br>现在，我们将左边中括号内的部分称为$y(x)$，这就相当于解决了这个方程。</p>
-<p>如果我们知道格林函数$G$，我们只需要将$f$和$G$带入其中即可找到解<br>$$<br>y(x) = \int_\mathbb{R} f(\xi)G(x;\xi) \mathrm{d} \xi<br>$$<br>实际上，由于$\delta$函数的性质，积分区域实际不必是整个空间，可以是一个尽可能小且合理的、便于计算的一个区域（如一个对称的球空间）。</p>
-<p>实践中，我们甚至不需要自己找到格林函数，在网上可以找到很多常见线性微分算子的格林函数。但是需要注意，实际应用中除了有微分方程之外，绝大多数情况下还需要考虑边界条件，否则将很容易得到无穷的个解，这将在之后的时间中具体讨论。</p>
-
+          <h1 id="格林函数：解决微分方程的天才方法"><a href="#格林函数：解决微分方程的天才方法" class="headerlink" title="格林函数：解决微分方程的天才方法"></a>格林函数：解决微分方程的天才方法</h1><p>格林函数是一种用于<strong>解决线性微分方程</strong>的非常精妙的方法。<br>$$<br>L y(x) = f(x)<br>$$<br>本文将简单地介绍格林函数法的基本原理，期间会引出在物理上非常重要的狄拉克$\delta$函数。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/10/31/Green-s-Function/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
